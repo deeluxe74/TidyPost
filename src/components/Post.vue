@@ -1,35 +1,39 @@
 <template>
     <div class="my-5">
-        <div class="w-100 grid-container">
-            <img class="profil" src="https://randomuser.me/api/portraits/men/81.jpg" alt="User profil">
-            <div class="name pl-3 mt-2">
-                <h3 class="m-0">Pierre Kin</h3>
-                <h5>pierre.kin@gmail.com</h5>
+        <router-link :to="{ name: 'Profil', params: { id: post.owner.id }}">
+            <div class="select-user p-2 w-100 grid-container">
+                <img class="profil" :src="post.owner.picture" alt="User profil">
+                <div class="name pl-3 mt-2">
+                    <h3 class="m-0">{{ post.owner.firstName }} {{ post.owner.lastName }}</h3>
+                    <h5>{{ post.owner.email }}</h5>
+                </div>
+                <h5 class="date">Posted {{ convertTimeAgo() }} ago</h5>
             </div>
-            <h5 class="date">Posted 6 Hour ago</h5>
-        </div>
+        </router-link>
+
         <p class="my-3">
-            Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.
+            {{ post.text }}
         </p>
 
-        <div class="picture-post"></div>
+        <div class="hover picture-post" @click="openUrl" :style="{ backgroundImage: 'url(' + post.image + ')' }"></div>
 
         <div class="tags d-flex flex-row flex-wrap">
-            <h4><span>#</span>Chien</h4>
-            <h4><span>#</span>Vivre</h4>
-            <h4><span>#</span>Promenade</h4>
-            <h4><span>#</span>Balade en Forêt</h4>
+            <h4 v-for="(tag, index) in post.tags"
+                :key="'tag ' + index"
+                class="hover">
+                <span>#</span>{{ tag }}
+            </h4>
         </div>
 
         <div class="social d-flex flex-row">
             <div class="d-flex flex-row mr-4">
                 <img src="/img/post/likes.svg" alt="Count of total likes">
-                <h4 class="ml-3 mb-0 align-self-center">2503</h4>
+                <h4 class="ml-3 mb-0 align-self-center">{{ post.likes }}</h4>
             </div>
-            <div class="d-flex flex-row">
+            <!--LIMITED CALL <div class="d-flex flex-row">
                 <img src="/img/post/comment.svg" alt="Count of total comment">
                 <h4 class="ml-3 mb-0 align-self-center">125</h4>
-            </div>
+            </div>-->
         </div>
 
         <hr>
@@ -39,7 +43,29 @@
 
 <script>
 export default {
+    props: ['post'],
+    methods: {
+        convertTimeAgo(){
+            const datePost = new Date(this.post.publishDate);
+            const date = new Date();
+            date.setHours(0,0,0,0);
 
+            let resetDatePost = new Date(datePost.getTime());
+            resetDatePost.setHours(0,0,0,0);
+
+            if(date.getTime() === resetDatePost.getTime()){
+                if(date.getHours() === datePost.getHours()){
+                    return new Date().getMinutes() - datePost.getMinutes() + ' Minutes';
+                }
+                return ((new Date().getHours() - datePost.getHours()) + 1) + ' Hours';
+            }else {
+                return ((new Date().getDate() - datePost.getDate())) + ' Days';
+            }
+        },
+        openUrl() {
+            window.open(this.post.image, "_blank");
+        }
+    },
 }
 </script>
 
@@ -47,7 +73,6 @@ export default {
 .picture-post {
     height: 50vh;
     width: 100%;
-    background-image: url('https://img.dummyapi.io/photo-1564694202779-bc908c327862.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 53px;
@@ -60,6 +85,15 @@ export default {
 
 .social img {
     width: 3rem;
+}
+
+.select-user {
+    transition: all 320ms linear;
+    cursor: pointer;
+}
+
+.select-user:hover {
+    background-color: rgb(243, 243, 243);
 }
 
 /* GRID */
