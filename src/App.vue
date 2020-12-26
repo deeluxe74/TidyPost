@@ -91,10 +91,34 @@ hr {
 }
 
 .hover {
+  transition: all 200ms linear;
   cursor: pointer;
 }
 
 .hover:hover {
   opacity: 0.9;
+}
+
+.hover-scale {
+  cursor: pointer;
+  transition: all 200ms linear;
+}
+
+.hover-scale:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+
+/* TRANSITION & ANIMATION */
+.slide-enter-active, .slide-leave-active {
+  transition: all 150ms ease-in;
+}
+.slide-enter {
+  transform: translateY(-100vh);
+  filter: blur(4px);
+}
+.slide-leave-to {
+  transform: translateY(-100vh);
+  filter: blur(4px);
 }
 </style>

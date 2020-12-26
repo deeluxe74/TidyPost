@@ -5,6 +5,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+
+axios.defaults.headers.common['app-id'] = process.env.VUE_APP_API_KEY;
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;

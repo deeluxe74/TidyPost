@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="!load">
         <div class="grid-container">
             <div class="since">
                 <h5>Since {{ dateStrForView(user.registerDate) }}</h5>
@@ -32,43 +32,36 @@
         <h3>{{ user.location.country }}, {{ user.location.state }}</h3>
         <h3>{{ user.location.city }}, {{ user.location.street }}</h3>
 
-        <div class="my-5">
+        <div class="my-5" v-if="!loadPost">
             <h1 class="mb-4">Last post</h1>
             <div class="d-flex flex-row flex-wrap justify-content-between">
-                <div class="picture-post"></div>
-                <div class="picture-post"></div>
-                <div class="picture-post"></div>
-                <div class="picture-post"></div>
+                <div v-for="(post, index) in posts" :key="'Post ' + index"
+                    :style="{ backgroundImage: 'url(' + post.image + ')' }"
+                    @click="goToPost(post.id)"
+                    class="hover-scale picture-post">
+                </div>
             </div>
         </div>
+        <spinner v-else></spinner>
     </div>
+    <spinner v-else></spinner>
 </template>
 
 <script>
 import Vue from 'vue';
+import Spinner from './Spinner';
 
 export default {
+    components: {
+        Spinner,
+    },
     data() {
         return {
             id: this.$route.params.id,
-            user: {
-                "id":"uQrnqsqyh8FjSXAPc7oA",
-                "phone":"05-65-32-93-41",
-                "email":"emilie.lambert@example.com",
-                "title":"mrs","gender":"female"
-                ,"picture":"https://randomuser.me/api/portraits/women/93.jpg",
-                "dateOfBirth":"1948-02-08T15:57:07.531Z",
-                "registerDate":"2020-03-06T14:46:14.954Z",
-                "firstName":"Emilie",
-                "lastName":"Lambert",
-                "location":{
-                    "country":"France",
-                    "state":"Loire",
-                    "city":"Reims",
-                    "street":"9594, Place des 44 Enfants D'Izieu",
-                    "timezone":"-3:30"
-                },
-            }
+            user: {},
+            posts: [],
+            load: true,
+            loadPost: true,
         }
     },
     methods: {
@@ -79,12 +72,31 @@ export default {
                 month: "2-digit",
                 day: "2-digit",
             });
+        },
+        goToPost(id) {
+            this.$router.push({ name: 'SinglePost', params: { id : id } });
         }
     },
     created() {
-        /*Vue.axios.get(`https://dummyapi.io/data/api/user/${this.id}`, { headers: { 'app-id': process.env.VUE_APP_API_KEY } }).then((response)=> {
+        this.load = true;
+        this.loadPost = true;
+        Vue.axios.get(`https://dummyapi.io/data/api/user/${this.id}`).then((response)=> {
             this.user = response.data;
-        });*/
+            this.load = false;
+        });
+
+        Vue.axios.get(`https://dummyapi.io/data/api/user/${this.id}/post?limit=10`).then((response)=> {
+            this.posts = response.data.data;
+            console.log(response.data);
+            this.loadPost = false;
+        });
+        /*Vue.axios.get('https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=AIzaSyCKz7C8dZiWMJkQJCZej_5cAw8LkTLwxcM',{
+            headers: { 'Content-Type': 'application/json'}
+        }
+        ).then((response) => {
+                console.log(response);
+            }
+        );*/
     }
 }
 </script>
@@ -125,7 +137,6 @@ iframe {
     margin-bottom: 2rem;
     height: 15vw;
     width: 28vw;
-    background-image: url('https://img.dummyapi.io/photo-1564694202779-bc908c327862.jpg');
     background-size: cover;
     background-position: center;
 }

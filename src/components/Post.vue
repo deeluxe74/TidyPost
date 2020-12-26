@@ -1,5 +1,5 @@
 <template>
-    <div class="my-5">
+    <div class="my-3">
         <router-link :to="{ name: 'Profil', params: { id: post.owner.id }}">
             <div class="select-user p-2 w-100 grid-container">
                 <img class="profil" :src="post.owner.picture" alt="User profil">
@@ -20,6 +20,7 @@
         <div class="tags d-flex flex-row flex-wrap">
             <h4 v-for="(tag, index) in post.tags"
                 :key="'tag ' + index"
+                @click="postByTags(tag)"
                 class="hover">
                 <span>#</span>{{ tag }}
             </h4>
@@ -64,6 +65,9 @@ export default {
         },
         openUrl() {
             window.open(this.post.image, "_blank");
+        },
+        postByTags(tag) {
+            this.$router.push({name: 'Tags', query: { tag: tag }});
         }
     },
 }
