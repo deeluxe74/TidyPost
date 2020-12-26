@@ -29,9 +29,8 @@ export default {
         setActive(to){
             if(to.name === 'Home') {
                 if(to.query.order === 'Likes'){
-                    console.log(to.query.order);
                     this.active = 2;
-                }else if(to.query.order === 'New'){
+                }else if(to.query.order === 'New' || to.query.order === undefined){
                     this.active = 1;
                 }
             }else if(to.name === 'Tags'){

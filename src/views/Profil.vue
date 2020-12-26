@@ -87,7 +87,6 @@ export default {
 
         Vue.axios.get(`https://dummyapi.io/data/api/user/${this.id}/post?limit=10`).then((response)=> {
             this.posts = response.data.data;
-            console.log(response.data);
             this.loadPost = false;
         });
         /*Vue.axios.get('https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney&key=AIzaSyCKz7C8dZiWMJkQJCZej_5cAw8LkTLwxcM',{

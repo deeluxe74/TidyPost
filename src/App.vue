@@ -121,4 +121,16 @@ hr {
   transform: translateY(-100vh);
   filter: blur(4px);
 }
+
+.appear-enter-active, .appear-leave-active {
+  transition: all 800ms ease-out;
+}
+.appear-enter {
+  opacity: 0.1;
+  filter: blur(4px);
+}
+.appear-leave-to {
+  opacity: 0.1;
+  filter: blur(4px);
+}
 </style>

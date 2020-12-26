@@ -15,12 +15,14 @@
         <div key="2" v-else>
             <img v-if="!this.$route.query.tag" @click="selectTag = false" class="hover" src="/img/global/left-arrow.svg" alt="Return to tag select">
             <router-back v-else></router-back>
-            <post v-for="(post, index) in posts"
-                :key="'post ' + index"
-                :post="post"
-                class="my-2"
-                >
-            </post>
+            <transition-group style="color:initial;" name="appear" mode="out-in">
+                <post v-for="(post, index) in postsDisplay"
+                    :key="'post ' + index"
+                    :post="post"
+                    class="my-2"
+                    >
+                </post>
+            </transition-group>
         </div>
     </transition-group>
     <spinner v-else></spinner>
@@ -31,8 +33,10 @@ import Vue from 'vue';
 import Spinner from './Spinner.vue';
 import Post from '../components/Post';
 import RouterBack from '../components/RouterBack.vue';
+import { shareHandleSroll } from '../mixins/shareHandleSroll';
 
 export default {
+    mixins: [shareHandleSroll],
     components: {
         Spinner,
         Post,
@@ -43,6 +47,7 @@ export default {
             load: true,
             tags: [],
             posts: [],
+            postsDisplay: [],
             selectTag: this.$route.query.tag,
         }
     },
@@ -50,6 +55,7 @@ export default {
         getPotsByTag(tag) {
             Vue.axios.get(`https://dummyapi.io/data/api/tag/${tag}/post`).then((response)=> {
                 this.posts = response.data.data;
+                this.postsDisplay = this.posts.slice(0, 5);
                 this.load = false;
             });
         }

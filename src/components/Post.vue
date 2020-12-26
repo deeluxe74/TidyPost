@@ -31,20 +31,26 @@
                 <img src="/img/post/likes.svg" alt="Count of total likes">
                 <h4 class="ml-3 mb-0 align-self-center">{{ post.likes }}</h4>
             </div>
-            <!--LIMITED CALL <div class="d-flex flex-row">
+            <div class="d-flex flex-row">
                 <img src="/img/post/comment.svg" alt="Count of total comment">
-                <h4 class="ml-3 mb-0 align-self-center">125</h4>
-            </div>-->
+                <h4 class="ml-3 mb-0 align-self-center">{{ comment }}</h4>
+            </div>
         </div>
-
         <hr>
         <br>
     </div>
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
     props: ['post'],
+    data() {
+        return {
+            comment: 0,
+        }
+    },
     methods: {
         convertTimeAgo(){
             const datePost = new Date(this.post.publishDate);
@@ -68,8 +74,14 @@ export default {
         },
         postByTags(tag) {
             this.$router.push({name: 'Tags', query: { tag: tag }});
+            location.reload();
         }
     },
+    created() {
+        /*Vue.axios.get(`https://dummyapi.io/data/api/post/${this.post.id}/comment`).then((response)=> {
+            this.comment = response.data.data.length;
+        });*/
+    }
 }
 </script>
 
