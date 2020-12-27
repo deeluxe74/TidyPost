@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="d-flex flex-row justify-content-start">
+  <div id="app" class="displayChange">
     <nav-bar></nav-bar>
     <router-view class="conteneur pt-3 w-100"></router-view>
   </div>
@@ -81,6 +81,12 @@ hr {
   border-top: 2px solid #E0DFDF;;
 }
 
+.displayChange {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
 .conteneur {
   padding: 0 8vw;
 }
@@ -88,6 +94,10 @@ hr {
 .title {
   font-weight: 400;
   font-size: 2.4rem;
+}
+
+.align-center {
+  text-align: center;
 }
 
 .hover {
@@ -132,5 +142,12 @@ hr {
 .appear-leave-to {
   opacity: 0.1;
   filter: blur(4px);
+}
+
+
+@media screen and (max-width: 500px){
+  .displayChange {
+    flex-direction: column;
+  }
 }
 </style>

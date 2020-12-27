@@ -1,15 +1,17 @@
 <template>
     <div class="px-5 py-3 nav-bar d-flex flex-column">
-        <router-link to="/"><h1 class="mb-4">TIDYPOST</h1></router-link>
-        <router-link :to="{name: 'Home', query: { order: 'New'}}">
-            <h2 :class="active === 1? 'active' : ''" class="my-4">New</h2>
-        </router-link>
-        <router-link :to="{name: 'Home', query: { order: 'Likes'}}">
-            <h2 :class="active === 2? 'active' : ''"  class="my-4">Likes</h2>
-        </router-link>
-        <router-link :to="{name: 'Tags'}">
-            <h2 :class="active  === 3? 'active' : ''"  class="my-4">Tags</h2>
-        </router-link>
+        <router-link to="/"><h1 class="mb-2">TIDYPOST</h1></router-link>
+        <div class="mobileDevice">
+            <router-link :to="{name: 'Home', query: { order: 'New'}}">
+                <h2 :class="active === 1? 'active' : ''" class="marginChange">New</h2>
+            </router-link>
+            <router-link :to="{name: 'Home', query: { order: 'Likes'}}">
+                <h2 :class="active === 2? 'active' : ''"  class="marginChange">Likes</h2>
+            </router-link>
+            <router-link :to="{name: 'Tags'}">
+                <h2 :class="active  === 3? 'active' : ''"  class="marginChange">Tags</h2>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -59,5 +61,30 @@ h2 {
 .active {
     font-weight: 600;
     opacity: 1;
+}
+
+.marginChange {
+    margin: 3rem 0;
+}
+
+@media screen and (max-width: 500px){
+    .nav-bar {
+        width: 100vw;
+        height: auto;
+    }
+    .mobileDevice {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .marginChange {
+        margin: 0 0;
+    }
+    .px-5 {
+        padding: 0!important;
+    }
+    .py-3 {
+        padding: 0!important;
+    }
 }
 </style>

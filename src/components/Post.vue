@@ -100,7 +100,7 @@ export default {
 }
 
 .social img {
-    width: 3rem;
+    width: 2.5rem;
 }
 
 .select-user {
