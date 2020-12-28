@@ -1,6 +1,6 @@
 export const shareHandleSroll = {
     methods: {
-        handleScroll(event){
+        handleScroll(){
             let currScroll = document.documentElement.scrollHeight - window.scrollY;
             if((currScroll - window.innerHeight) < 40) {
               let numPostsDisplay = this.postsDisplay.length;

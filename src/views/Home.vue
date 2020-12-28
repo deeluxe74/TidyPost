@@ -57,7 +57,6 @@ export default {
   methods: {
     orderByLike() {
       this.posts.sort((a ,b) =>(b.likes > a.likes) ? 1 : -1);
-      console.log(this.posts);
     }
   },
   created() {

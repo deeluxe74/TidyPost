@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="displayChange">
     <nav-bar></nav-bar>
-    <router-view class="conteneur pt-3 w-100"></router-view>
+    <transition name="appear" mode="out-in">
+      <router-view class="conteneur pt-3 w-100"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -25,8 +27,6 @@ body, html {
   width: 100%;
   height: 100%;
   word-spacing: -0.05rem;
-  /*overflow-y: hidden;
-  overflow-x: hidden;*/
 }
 
 #app {
@@ -145,14 +145,13 @@ hr {
   transition: all 800ms ease-out;
 }
 .appear-enter {
-  opacity: 0.1;
+  opacity: 0;
   filter: blur(4px);
 }
 .appear-leave-to {
-  opacity: 0.1;
+  opacity: 0;
   filter: blur(4px);
 }
-
 
 @media screen and (max-width: 500px){
   body, html {

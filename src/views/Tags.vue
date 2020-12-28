@@ -1,7 +1,7 @@
 <template>
     <transition-group v-if="!load" name="slide" mode="out-in">
         <div key="1" v-if="!selectTag">
-            <div class="tag-display">
+            <div class="my-4 tag-display">
                 <div class="d-flex flex-row justify-content-start flex-wrap">
                     <div v-for="(tag, index) in tags" :key="index"
                         @click="selectTag = tag"
@@ -55,6 +55,7 @@ export default {
             Vue.axios.get(`https://dummyapi.io/data/api/tag/${tag}/post`).then((response)=> {
                 this.posts = response.data.data;
                 this.postsDisplay = this.posts.slice(0, 5);
+                window.scrollTo(0,0);
                 this.load = false;
             });
         }

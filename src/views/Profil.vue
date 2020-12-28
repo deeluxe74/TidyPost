@@ -7,12 +7,9 @@
             <div class="profil">
                 <img :src="user.picture" alt="User profil picture">
             </div>
-            <div class="gender">
-                <h4 class="gender">({{ user.gender === 'male' ? 'Man' : 'Woman' }})</h4>
-            </div>
             <div class="name">
                 <div class="d-flex flex-row">
-                    <h1 class="mr-2"><span :class=" user.gender === 'male' ? 'cl-blue' : 'cl-pink'">{{ user.title }}</span> {{ user.firstName }} {{ user.lastName }}</h1>
+                    <h1 class="mr-2"><span :class=" user.gender === 'male' ? 'cl-blue' : 'cl-pink'">{{ user.title }}</span> {{ user.firstName }} {{ user.lastName }} <span class="gender">({{ user.gender === 'male' ? 'Man' : 'Woman' }})</span></h1>
                 </div>
                 <h5>{{ user.email }}</h5>
             </div>
@@ -170,10 +167,15 @@ iframe {
 
 .profil img {
     border-radius: 50%;
-    width: 10rem;
+    width: 15vw;
+}
+
+.name h1 {
+    line-height: 0.8;
 }
 
 .gender {
+    color: black;
     font-size: 1rem;
 }
 
@@ -185,15 +187,12 @@ iframe {
   gap: 0px 0px;
   grid-template-areas:
     ". . . . since"
-    "name name name gender profil"
-    "birthday-svg birthday-txt . . profil"
+    "name name name profil profil"
+    "birthday-svg birthday-txt . profil profil"
     "phone-svg phone-txt . . .";
 }
 .since {
     grid-area: since;
-}
-.gender {
-    grid-area: gender;
 }
 .profil {
     margin: 0.8rem 0 1rem 0;
@@ -231,6 +230,10 @@ iframe {
         width: 95%;
     }
 
+    .profil img {
+        width: 10rem;
+    }
+
     .align-change {
         flex-direction: column;
     }
@@ -243,7 +246,7 @@ iframe {
         grid-template-areas:
             ". since since since"
             "profil profil profil profil"
-            "name name name gender"
+            "name name name name"
             "birthday-svg birthday-svg phone-svg phone-svg"
             "birthday-txt birthday-txt phone-txt phone-txt";
     }

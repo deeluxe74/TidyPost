@@ -17,7 +17,7 @@
 
         <div class="hover picture-post" @click="openUrl" :style="{ backgroundImage: 'url(' + post.image + ')' }"></div>
 
-        <div class="tags d-flex flex-row flex-wrap">
+        <div class="tags d-flex flex-row justify-content-center flex-wrap">
             <h4 v-for="(tag, index) in post.tags"
                 :key="'tag ' + index"
                 @click="postByTags(tag)"
@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
 .picture-post {
-    height: 50vh;
+    height: 60vh;
     width: 100%;
     background-size: cover;
     background-position: center;
