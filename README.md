@@ -13,11 +13,7 @@ Une Web/app qui organise sous certains critères, on retrouve différents posts 
 ### Installation sur votre système
 **Développé en Vue.js (Javascript)** <br>
 
-<<<<<<< HEAD
 Le projet peut être mis en place rapidement grâce à une commande, cela va installer tous les fichiers nécessaires à l'intérieur
-=======
-Le projet peut être mis en place rapidement grâce à une commande, cela va installer tous les fichiers nécessaires à l'intérieur 
->>>>>>> 04e8acb2f6bd74238f042f812546956657601956
 de nodes-modules :
 ```
 npm run install
