@@ -2,7 +2,6 @@
     <transition-group v-if="!load" name="slide" mode="out-in">
         <div key="1" v-if="!selectTag">
             <div class="tag-display">
-                <h1 class="mb-3 title">Available Tag :</h1>
                 <div class="d-flex flex-row justify-content-start flex-wrap">
                     <div v-for="(tag, index) in tags" :key="index"
                         @click="selectTag = tag"
@@ -81,7 +80,7 @@ export default {
 
 <style scoped>
 img {
-    width: 3.5vw;
+    width: 2.5rem;
 }
 
 .hover:hover {
@@ -99,10 +98,10 @@ img {
 
 .tag-badge {
     margin-bottom: 2rem;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     border-radius: 6px;
     background-color: #ff004c;
     color: white;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
 }
 </style>

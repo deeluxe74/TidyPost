@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 img {
-    width: 3.5vw;
+    width: 2.5rem;
 }
 
 .hover:hover {

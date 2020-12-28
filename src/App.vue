@@ -34,7 +34,7 @@ body, html {
 }
 
 h1 {
-  font-weight: 600;
+  font-weight: 800;
   font-family: 'Prompt', sans-serif;
   color: #ff004c;
 }
@@ -49,6 +49,7 @@ h3 {
 }
 
 h4 {
+  font-family: 'Prompt', sans-serif;
   font-size: 1.3rem;
   font-weight: 800;
 }
@@ -106,7 +107,7 @@ hr {
 }
 
 .hover:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .hover-scale {
@@ -117,6 +118,14 @@ hr {
 .hover-scale:hover {
   opacity: 0.9;
   transform: scale(1.1);
+}
+
+.cl-blue {
+  color: #00a2ff;
+}
+
+.cl-pink {
+  color: #ff004c;
 }
 
 /* TRANSITION & ANIMATION */
@@ -146,6 +155,27 @@ hr {
 
 
 @media screen and (max-width: 500px){
+  body, html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+
+  }
+
+  .tags h4 {
+    font-size: 1.2rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
   .displayChange {
     flex-direction: column;
   }

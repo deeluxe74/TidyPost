@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             load: true,
-            post: null,
+            post: {},
             id: this.$route.params.id,
         }
     },

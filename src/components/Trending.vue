@@ -1,7 +1,7 @@
 <template>
     <div class="pt-5">
         <h2 class="title">Recent Burn</h2>
-        <div v-if="!load" class="px-1 mt-3 w100 d-flex flex-row justify-content-between align-items-center">
+        <div v-if="!load" class="px-1 mt-3 w100 d-flex flex-row justify-content-between align-items-center flex-wrap">
             <div
                 v-for="(post, index) in posts" :key="'trending ' + index"
                 class="hover picture-post"
@@ -64,5 +64,17 @@ hr {
     background-position: center;
     border-radius: 50%;
     margin: auto;
+}
+
+@media screen and (max-width: 500px){
+    .pt-5 {
+        padding-top: 0!important;
+    }
+    .picture-post {
+        margin-top: 1rem;
+        width: 30vw;
+        height: 30vw;
+        border-radius: 50%;
+    }
 }
 </style>

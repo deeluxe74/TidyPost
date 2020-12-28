@@ -1,5 +1,5 @@
 <template>
-    <div class="my-3">
+    <div>
         <router-link :to="{ name: 'Profil', params: { id: post.owner.id }}">
             <div class="select-user p-2 w-100 grid-container">
                 <img class="profil" :src="post.owner.picture" alt="User profil">
@@ -59,14 +59,17 @@ export default {
 
             let resetDatePost = new Date(datePost.getTime());
             resetDatePost.setHours(0,0,0,0);
-
             if(date.getTime() === resetDatePost.getTime()){
-                if(date.getHours() === datePost.getHours()){
+                if(new Date().getHours() === datePost.getHours()){
                     return new Date().getMinutes() - datePost.getMinutes() + ' Minutes';
                 }
                 return ((new Date().getHours() - datePost.getHours()) + 1) + ' Hours';
             }else {
-                return ((new Date().getDate() - datePost.getDate())) + ' Days';
+                const currMonth = new Date().getMonth();
+                if(currMonth === datePost.getMonth()){
+                    return ((new Date().getDate() - datePost.getDate())) + ' Days';
+                }
+                return Math.floor((new Date().getTime()- datePost.getTime())/86400000) + ' Days';
             }
         },
         openUrl() {
@@ -78,9 +81,9 @@ export default {
         }
     },
     created() {
-        /*Vue.axios.get(`https://dummyapi.io/data/api/post/${this.post.id}/comment`).then((response)=> {
+        Vue.axios.get(`https://dummyapi.io/data/api/post/${this.post.id}/comment`).then((response)=> {
             this.comment = response.data.data.length;
-        });*/
+        });
     }
 }
 </script>
@@ -96,7 +99,7 @@ export default {
 }
 
 .tags h4 {
-    margin: 1rem 20px;
+    margin: 1rem 1rem;
 }
 
 .social img {
@@ -135,4 +138,31 @@ export default {
     text-align: end;
 }
 
+@media screen and (max-width: 500px){
+    h5 {
+       word-break: break-all;
+       font-size: 0.9rem;
+    }
+
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 0rem;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+            ". date"
+            "profil name"
+    }
+    .profil {
+        grid-area: profil;
+        border-radius: 50%;
+        width: 20vw;
+        height: 20vw;
+    }
+}
 </style>
